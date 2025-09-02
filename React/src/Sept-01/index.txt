@@ -1,0 +1,1 @@
+Explored Micro frontend Concepts, those files are in MFE folder.

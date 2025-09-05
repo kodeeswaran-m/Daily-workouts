@@ -15,15 +15,26 @@ import { Provider } from "react-redux";
 import store from "./Sept-04/Async thunk/Store";
 import CounterDashboard from "./Sept-04/Redux Thunk/CounterDashBoard";
 import QuotesList from "./Sept-04/Async thunk/QuotesList";
+import FilterListWithTransition from "./Sept-05/UseTransition/FilterListWithTransition";
+import FilterListWithoutTransition from "./Sept-05/UseTransition/FilterListWithoutTransition";
+import SearchListWithDeferred from "./Sept-05/UseDeferredValue/SearchListWithDeferred";
+import SearchListWithoutDeferred from "./Sept-05/UseDeferredValue/SearchListWithoutDeferred";
 
 export default function App() {
   return (
     <>
+      {/* SEPT 05 */}
+      <div style={{display:"flex", flexDirection:"row"}}>
+        {/* <FilterListWithTransition/> */}
+        {/* <FilterListWithoutTransition/> */}
+        {/* <SearchListWithDeferred/> */}
+        <SearchListWithoutDeferred/>
+      </div>
       {/* SEPT 04 */}
-      <Provider store={store}>
-        {/* <RecipesList /> */}
+      {/* <Provider store={store}>
+        <RecipesList />
         <QuotesList/>
-      </Provider>
+      </Provider> */}
       {/* <CounterDashboard /> */}
 
       {/* SEPT 03 */}

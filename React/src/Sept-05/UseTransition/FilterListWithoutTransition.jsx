@@ -4,7 +4,7 @@ export default function FilterListWithoutTransition() {
   const [query, setQuery] = useState("");
   const [filteredList, setFilteredList] = useState([]);
 
-  const bigList = Array.from({ length: 20000 }, (_, i) => `Item ${i + 1}`);
+  const bigList = Array.from({ length: 40000 }, (_, i) => `Item ${i + 1}`);
 
   const handleChange = (e) => {
     const value = e.target.value;

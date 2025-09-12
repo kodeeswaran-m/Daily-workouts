@@ -1,33 +1,21 @@
 {
-  "name": "daily-workout",
+  "name": "mfe-departments",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --watch",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.1",
-    "@mui/icons-material": "^7.3.1",
-    "@mui/material": "^7.3.2",
-    "@mui/x-charts": "^8.11.0",
-    "@reduxjs/toolkit": "^2.9.0",
-    "axios": "^1.11.0",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "react-error-boundary": "^6.0.0",
-    "react-hook-form": "^7.62.0",
-    "react-redux": "^9.2.0",
-    "react-router-dom": "^7.8.2",
-    "redux": "^5.0.1",
-    "redux-thunk": "^3.1.0"
+    "react-dom": "^19.1.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
+    "@originjs/vite-plugin-federation": "^1.4.1",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^5.0.0",

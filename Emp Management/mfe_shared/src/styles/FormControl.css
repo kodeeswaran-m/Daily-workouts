@@ -1,0 +1,51 @@
+.form-control-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.form-control-label {
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #444;
+}
+
+.form-control-element {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control-element:focus {
+  border-color: #7d4cdb;
+  box-shadow: 0 0 0 2px rgba(125, 76, 219, 0.15);
+}
+
+/* Sizes */
+.form-sm {
+  padding: 6px 8px;
+  font-size: 13px;
+}
+.form-md {
+  padding: 10px 12px;
+  font-size: 14px;
+}
+.form-lg {
+  padding: 14px 16px;
+  font-size: 16px;
+}
+
+.form-error {
+  border-color: red;
+}
+
+.form-control-error {
+  margin-top: 4px;
+  color: red;
+  font-size: 13px;
+}

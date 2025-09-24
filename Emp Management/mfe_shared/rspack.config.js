@@ -102,6 +102,7 @@ module.exports = {
       exposes: {
         "./Input":"./src/components/Input.jsx",
         "./FormControl":"./src/components/FormControl.jsx",
+        "./Button":"./src/components/Button.jsx",
       },
       shared: {
         react: { eager: true },

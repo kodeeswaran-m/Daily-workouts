@@ -105,6 +105,8 @@ module.exports = {
       },
       exposes: {
         "./LoginForm": "./src/components/LoginForm",
+        "./RegisterForm": "./src/components/RegisterForm",
+        "./WelcomePage": "./src/components/WelcomePage",
       },
       shared: {
         react: { singleton: true, requiredVersion: false },

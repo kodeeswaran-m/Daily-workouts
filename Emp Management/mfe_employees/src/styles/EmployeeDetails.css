@@ -1,0 +1,126 @@
+.emp-details-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  background: #f8f9fa;
+  min-height: 100vh;
+}
+
+.dept-back-btn {
+
+  background: #8347ad;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  z-index: 10;      
+}
+.emp-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 900px;
+  width: 100%;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  font-family: "Arial", sans-serif;
+}
+
+/* Header */
+.emp-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.emp-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.emp-header h2 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.emp-job {
+  color: #777;
+  font-size: 1rem;
+}
+
+.emp-status {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  margin-top: 6px;
+  text-transform: capitalize;
+}
+.emp-status.active { background: #d4f8d4; color: #2e7d32; }
+.emp-status.inactive { background: #ffe0e0; color: #d32f2f; }
+/* .emp-status["on-leave"] { background: #fff4e0; color: #f57c00; } */
+.emp-status.terminated { background: #fce4ec; color: #c2185b; }
+
+/* Info grid */
+.emp-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.emp-info-grid h4 {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.emp-info-grid p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* Sections */
+.emp-section {
+  margin-bottom: 2rem;
+}
+
+.emp-section h3 {
+  margin-bottom: 0.8rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Lists */
+.skills-list, .contacts-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skills-list li, .contacts-list li {
+  background: #f1f3f5;
+  padding: 0.6rem 1rem;
+  margin-bottom: 0.6rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .emp-card { padding: 1.5rem; }
+  .emp-header { flex-direction: column; align-items: flex-start; }
+  .emp-avatar { width: 70px; height: 70px; }
+  .emp-info-grid { grid-template-columns: 1fr; }
+}

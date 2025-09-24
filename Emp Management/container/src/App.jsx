@@ -8,20 +8,37 @@ import {
   Navigate,
   Route,
   Routes,
-  useNavigate,
   NavLink,
+  useNavigate,
 } from "react-router-dom";
-import DashBoard from "./components/DashBoard";
+import { Menu, UserCircle2, X, HeartHandshake } from "lucide-react";
 import { logoutUser, refreshAccessToken } from "./store/authSlice";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import store from "./store";
 import "./setupInterceptors";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AuthRoute from "./components/AuthRoute";
-import Employee from "./components/Employee";
-import Department from "./components/Department";
 
 const LoginForm = React.lazy(() => import("mfe_auth/LoginForm"));
+const RegisterForm = React.lazy(() => import("mfe_auth/RegisterForm"));
+const WelcomePage = React.lazy(() => import("mfe_auth/WelcomePage"));
+const EmployeesPage = React.lazy(() => import("mfe_employees/EmployeesPage"));
+const EmployeeDetailsPage = React.lazy(() =>
+  import("mfe_employees/EmployeeDetailsPage")
+);
+const EmployeeFormPage = React.lazy(() =>
+  import("mfe_employees/EmployeeFormPage")
+);
+const DashboardPage = React.lazy(() => import("mfe_dashboard/DashboardPage"));
+const DepartmentsPage = React.lazy(() =>
+  import("mfe_departments/DepartmentsPage")
+);
+const DepartmentFormPage = React.lazy(() =>
+  import("mfe_departments/DepartmentFormPage")
+);
+const DepartmentDetailsPage = React.lazy(() =>
+  import("mfe_departments/DepartmentDetailsPage")
+);
 
 const App = () => {
   const navigate = useNavigate();
@@ -29,6 +46,7 @@ const App = () => {
   const { user, accessToken, initialized } = useSelector((s) => s.auth);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -37,7 +55,7 @@ const App = () => {
         navigate("/login");
       }
     } catch (err) {
-      console.error("Login error:", err);
+      console.error("Logout error:", err);
     }
   };
 
@@ -52,10 +70,8 @@ const App = () => {
   return (
     <>
       <header className="header">
-        {/* Left: EMS */}
-        <h1 className="header-title">EMS</h1>
+        <h1 className="header-title main-title">Employee Management </h1>
 
-        {/* Desktop nav (hidden on mobile) */}
         {user && accessToken && (
           <nav className="nav-menu">
             <NavLink to="/dashboard" className="nav-link">
@@ -70,29 +86,43 @@ const App = () => {
           </nav>
         )}
 
-        {/* Right: Hamburger (mobile only) */}
         {user && accessToken && (
           <button
             className="menu-toggle"
             onClick={() => setIsMenuOpen((prev) => !prev)}
           >
-            ☰
+            {isMenuOpen ? <X /> : <Menu />}
           </button>
         )}
 
-        {/* Desktop logout/login */}
         {user && accessToken ? (
-          <button onClick={handleLogout} className="logoutBtn">
-            Logout
-          </button>
+          <div className="avatar-container desktop-only">
+            <button
+              className="avatar-btn"
+              onClick={() => setIsProfileOpen((prev) => !prev)}
+            >
+              <UserCircle2 size={36} />
+            </button>
+
+            {isProfileOpen && (
+              <div className="profile-dropdown">
+                {/* <p className="profile-username">👤 {user?.name}</p> */}
+                <p className="profile-name">{user?.name}</p>
+                <p className="profile-email">{user?.email}</p>
+                <button onClick={handleLogout} className="logoutBtn">
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
         ) : (
-          <Link to="/login">
-            <button className="login-btn">Login</button>
-          </Link>
+          // <Link to="/login">
+          //   <button className="login-btn">Login</button>
+          // </Link>
+          <HeartHandshake />
         )}
       </header>
 
-      {/* Overlay */}
       {isMenuOpen && (
         <div
           className="menu-overlay"
@@ -100,9 +130,9 @@ const App = () => {
         ></div>
       )}
 
-      {/* Side Menu (mobile) */}
       {user && accessToken && (
         <div className={`side-menu ${isMenuOpen ? "open" : ""}`}>
+          <h3 className="header-title header-mble">EMS</h3>
           <NavLink
             to="/dashboard"
             className="nav-link"
@@ -125,16 +155,57 @@ const App = () => {
             Departments
           </NavLink>
 
-          {/* Logout at bottom */}
-          <button onClick={handleLogout} className="logoutBtn">
-            Logout
-          </button>
+          {/* <div className="avatar-container mobile-only">
+            <button
+              className="avatar-btn"
+              onClick={() => setIsProfileOpen((prev) => !prev)}
+            >
+              <UserCircle2 size={36} />
+            </button>
+
+            {isProfileOpen && (
+              <div className="sidebar-dropdown">
+                <p className="profile-name">
+                  {user?.name} 
+                </p>
+                <p className="profile-email">{user?.email}</p>
+                <button onClick={handleLogout} className="logoutBtn">
+                  Logout
+                </button>
+              </div>
+              // <p style={{color:"yellow"}}>sdfghj</p>
+            )}
+          </div> */}
+          <div className="avatar-container mobile-only">
+            <button
+              className="avatar-btn"
+              onClick={() => setIsProfileOpen((prev) => !prev)}
+            >
+              <UserCircle2 size={36} />
+            </button>
+
+            <div className={`sidebar-dropdown ${isProfileOpen ? "open" : ""}`}>
+              <p className="profile-name">{user?.name}</p>
+              <p className="profile-email">{user?.email}</p>
+              <button onClick={handleLogout} className="logoutBtn">
+                Logout
+              </button>
+            </div>
+          </div>
         </div>
       )}
 
       <main className="main-content">
         <Suspense fallback={<p>Loading...</p>}>
           <Routes>
+            <Route
+              path="/"
+              element={
+                <AuthRoute>
+                  <WelcomePage />
+                </AuthRoute>
+              }
+            />
             <Route
               path="/login"
               element={
@@ -143,10 +214,35 @@ const App = () => {
                 </AuthRoute>
               }
             />
+            <Route
+              path="/register"
+              element={
+                <AuthRoute>
+                  <RegisterForm onRegisterSuccess={() => navigate("/login")} />
+                </AuthRoute>
+              }
+            />
             <Route element={<ProtectedRoute />}>
-              <Route path="/dashboard" element={<DashBoard />} />
-              <Route path="/employees" element={<Employee />} />
-              <Route path="/departments" element={<Department />} />
+              <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/employees" element={<EmployeesPage />} />
+              <Route
+                path="/employeeDetail/:id"
+                element={<EmployeeDetailsPage />}
+              />
+              <Route
+                path="/updateEmployee/:id"
+                element={<EmployeeFormPage />}
+              />
+              <Route path="/departments" element={<DepartmentsPage />} />
+              <Route path="/addDepartment" element={<DepartmentFormPage />} />
+              <Route
+                path="/departmentDetails/:id"
+                element={<DepartmentDetailsPage />}
+              />
+              <Route
+                path="/editDepartment/:id"
+                element={<DepartmentFormPage />}
+              />
             </Route>
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>
@@ -155,126 +251,6 @@ const App = () => {
     </>
   );
 };
-
-// import ReactDOM from "react-dom/client";
-// import React, { useEffect } from "react";
-// import { Suspense } from "react";
-// import "./App.css";
-// import {
-//   BrowserRouter,
-//   Link,
-//   Navigate,
-//   Route,
-//   Routes,
-//   useNavigate,
-//   NavLink
-// } from "react-router-dom";
-// import DashBoard from "./components/DashBoard";
-// import { logoutUser, refreshAccessToken } from "./store/authSlice";
-// import { Provider, useDispatch, useSelector } from "react-redux";
-// import store from "./store";
-// import "./setupInterceptors";
-// import ProtectedRoute from "./components/ProtectedRoute";
-// import AuthRoute from "./components/AuthRoute";
-// import Employee from "./components/Employee";
-// import Department from "./components/Department";
-
-// const LoginForm = React.lazy(() => import("mfe_auth/LoginForm"));
-
-// const App = () => {
-//   const navigate = useNavigate();
-//   const dispatch = useDispatch();
-//   // const initialized = useSelector((s) => s.auth.initialized);
-//   const { user, accessToken, initialized } = useSelector((s) => s.auth);
-//   // console.log("user, accessToken from app.jsx", user, accessToken);
-
-//   const handleLogout = async () => {
-//     try {
-//       const resultAction = await dispatch(logoutUser());
-//       console.log("from handleLogout :", resultAction);
-//       if (logoutUser.fulfilled.match(resultAction)) {
-//         navigate("/login");
-//       }
-//     } catch (err) {
-//       console.error("Login error:", err);
-//     }
-//   };
-//   useEffect(() => {
-//     if (!initialized) {
-//       dispatch(refreshAccessToken());
-//     }
-//   }, [dispatch, initialized]);
-
-//   if (!initialized) return <div>Loading...</div>; // wait for refresh attempt
-//   return (
-//     <>
-
-//       <header className="header">
-//         <h1 className="header-title">EMS</h1>
-
-//         {user && accessToken && (
-//           <nav className="nav-menu">
-//             <NavLink
-//               to="/dashboard"
-//               className={({ isActive }) =>
-//                 isActive ? "nav-link active" : "nav-link"
-//               }
-//             >
-//               Dashboard
-//             </NavLink>
-//             <NavLink
-//               to="/employees"
-//               className={({ isActive }) =>
-//                 isActive ? "nav-link active" : "nav-link"
-//               }
-//             >
-//               Employees
-//             </NavLink>
-//             <NavLink
-//               to="/departments"
-//               className={({ isActive }) =>
-//                 isActive ? "nav-link active" : "nav-link"
-//               }
-//             >
-//               Departments
-//             </NavLink>
-//           </nav>
-//         )}
-
-//         {user && accessToken ? (
-//           <button onClick={handleLogout} className="logoutBtn">
-//             Logout
-//           </button>
-//         ) : (
-//           <Link to="/login">
-//             <button className="login-btn">Login</button>
-//           </Link>
-//         )}
-//       </header>
-
-//       <main className="main-content">
-//         <Suspense fallback={<p>Loading...</p>}>
-//           <Routes>
-//             <Route
-//               path="/login"
-//               element={
-//                 <AuthRoute>
-//                   <LoginForm onLoginSuccess={() => navigate("/dashboard")} />
-//                 </AuthRoute>
-//               }
-//             />
-//             <Route element={<ProtectedRoute />}>
-//               <Route path="/dashboard" element={<DashBoard />} />
-//               <Route path="/employees" element={<Employee />} />
-//               <Route path="/departments" element={<Department />} />
-//             </Route>
-//             <Route path="*" element={<Navigate to="/dashboard" replace />} />
-//           </Routes>
-//         </Suspense>
-//       </main>
-//     </>
-//   );
-// };
 
 const rootElement = document.getElementById("app");
 if (!rootElement) throw new Error("Failed to find the root element");
@@ -288,3 +264,5 @@ root.render(
     </BrowserRouter>
   </Provider>
 );
+
+export default App;

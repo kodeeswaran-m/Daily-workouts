@@ -1,0 +1,78 @@
+/* Table wrapper */
+.employee-table-wrapper {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  overflow-x: auto;
+  margin-top: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* Table */
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Header */
+.employee-table th {
+  background: #8347ad;
+  color: white;
+  font-weight: 600;
+  text-align: left;
+  padding: 0.8rem;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+/* Table cells */
+.employee-table td {
+  border-bottom: 1px solid #eee;
+  padding: 0.7rem;
+  font-size: 0.9rem;
+  color: #333;
+  white-space: nowrap;
+}
+
+/* Hover row effect */
+.employee-table tr:hover td {
+  background: rgba(131, 71, 173, 0.08);
+}
+
+/* No data row */
+.nodata {
+  text-align: center;
+  padding: 1rem;
+  color: #8347ad;
+  font-style: italic;
+}
+
+/* Action buttons */
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-buttons .icon-btn {
+  border: none;
+  background: rgba(131, 71, 173, 0.1);
+  color: #8347ad;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-buttons .del-btn:hover {
+  background: #e92a1c;
+  color: white;
+}
+.action-buttons .edit-btn:hover {
+  background: #777777;
+  color: white;
+}
+
+
+

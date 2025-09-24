@@ -1,0 +1,209 @@
+/* Container */
+.department-form-page {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  font-family: "Arial", sans-serif;
+}
+
+/* Heading */
+.department-form-page h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #8347ad;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Form layout */
+.department-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem 1.5rem;
+}
+
+/* Form groups */
+.department-form .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.department-form .form-group label {
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  color: #444;
+  font-size: 0.9rem;
+}
+/* Make description field span full width */
+.department-form .form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.department-form .form-group input,
+.department-form .form-group textarea,
+.department-form .form-group select {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+.department-form .form-group input:focus,
+.department-form .form-group textarea:focus,
+.department-form .form-group select:focus {
+  outline: none;
+  border-color: #8347ad;
+  box-shadow: 0 0 0 2px rgba(131, 71, 173, 0.2);
+}
+
+/* Textarea */
+.department-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Array fields (Goals / Projects) */
+.array-field {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.array-field input {
+  flex: 1;
+}
+
+.array-field button {
+  background: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 0.35rem 0.7rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.2s;
+}
+
+.array-field button:hover {
+  background: #c82333;
+}
+
+/* Add Goal/Project buttons */
+.department-form .form-group > button {
+  padding: 0.45rem 0.8rem;
+  margin-top: 0.5rem;
+  background: #8347ad;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+  width: fit-content;
+}
+
+.department-form .form-group > button:hover {
+  background: #6c2c91;
+}
+
+/* Actions */
+.form-actions {
+  grid-column: span 2;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.primary-btn {
+  background: #8347ad;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.primary-btn:hover {
+  background: #6c2c91;
+}
+
+.secondary-btn {
+  background: #6c757d;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.secondary-btn:hover {
+  background: #5a6268;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .department-form {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+    grid-column: span 1;
+  }
+
+  .primary-btn,
+  .secondary-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
+
+
+/* default toast */
+.custom-toast {
+  border-radius: 8px;
+  font-size: 14px;
+  color: white;
+}
+
+/* success toast */
+.Toastify__toast--success {
+  background-color: white !important; /* green */
+  color: #8347ad !important;
+  /* color: #8347ad !important; */
+}
+
+/* error toast */
+.Toastify__toast--error {
+  background-color: white !important; /* green */
+  color: #8347ad !important;
+}
+
+/* global progress bar */
+.Toastify__progress-bar {
+  background: #007bff !important; /* blue */
+}
+
+/* success toast progress bar */
+.Toastify__progress-bar--success {
+  background: #8347ad  !important; /* green */
+}
+
+/* error toast progress bar */
+.Toastify__progress-bar--error {
+  background: #dc3545 !important; /* red */
+}
+

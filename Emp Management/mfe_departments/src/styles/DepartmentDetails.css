@@ -1,0 +1,248 @@
+/* ====== Layout Wrapper ====== */
+.dept-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem;
+  background: #f8f9fa;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* ====== Card Container ====== */
+.dept-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 100%;
+  max-width: 900px;
+  font-family: "Arial", sans-serif;
+  transition: all 0.3s ease;
+}
+
+.dept-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* ====== Titles ====== */
+.dept-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+  text-align: center;
+}
+
+.dept-subtitle {
+  font-size: 1rem;
+  color: #777;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.dept-description {
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  color: #555;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* ====== Info Section ====== */
+.dept-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.dept-info-grid h4 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #444;
+}
+
+.dept-info-grid p {
+  font-size: 0.95rem;
+  color: #666;
+  margin: 0;
+}
+
+/* ====== Section Wrapper ====== */
+.dept-section {
+  margin-bottom: 2rem;
+}
+
+.dept-section h3 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+/* ====== Search Box ====== */
+.dept-section input[type="text"] {
+  flex: 1;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.dept-section input[type="text"]:focus {
+  border-color: #8347ad;
+}
+
+.dept-section button {
+  background: #8347ad;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.dept-section button:hover {
+  background: #6b3691;
+}
+
+/* ====== Employee Lists ====== */
+.dept-list {
+  padding-left: 1.2rem;
+  list-style: disc;
+  color: #444;
+  margin: 0;
+}
+
+.dept-list li {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+/* ====== Loading & Error States ====== */
+.dept-loading {
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.dept-error-wrapper {
+  text-align: center;
+  margin-top: 3rem;
+  color: red;
+}
+
+.dept-retry-btn {
+  background: #ff4d4f;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.dept-retry-btn:hover {
+  background: #e63b3d;
+}
+
+/* ====== Responsive Design ====== */
+@media (max-width: 768px) {
+  .dept-card {
+    padding: 1.5rem;
+  }
+
+  .dept-title {
+    font-size: 1.6rem;
+  }
+
+  .dept-description {
+    font-size: 1rem;
+  }
+
+  .dept-section h3 {
+    font-size: 1.2rem;
+  }
+
+  .dept-section input[type="text"] {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .dept-card {
+    padding: 1rem;
+  }
+
+  .dept-title {
+    font-size: 1.4rem;
+  }
+
+  .dept-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .dept-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dept-section button {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+}
+
+
+/* ====== Back Button Top Left ====== */
+.dept-back-btn {
+
+  background: #8347ad;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  z-index: 10;
+}
+
+.dept-back-btn:hover {
+  background: #6b3691;
+}
+
+/* Full-width card for Projects & Goals */
+.project-card,
+.goal-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  font-size: 1rem;
+  color: #555;
+}
+
+.project-card:hover,
+.goal-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Section wrapper */
+.dept-section-cards {
+  display: flex;
+  flex-direction: column;
+}

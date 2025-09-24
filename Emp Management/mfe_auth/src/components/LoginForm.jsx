@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "container/store";
-import Input from "mfe_shared/Input"; // ✅ from shared MFE
-import FormControl from "mfe_shared/FormControl"
-// import Button from "mfe_shared/Button"; // optional
+import FormControl from "mfe_shared/FormControl";
+import styles from "../styles/LoginForm.module.css";
+import { Link } from "react-router-dom";
 
 const LoginForm = ({ onLoginSuccess }) => {
   const dispatch = useDispatch();
@@ -20,58 +20,59 @@ const LoginForm = ({ onLoginSuccess }) => {
     e.preventDefault();
     const result = await dispatch(loginUser(form));
     if (loginUser.fulfilled.match(result)) {
+      console.log("Token is ready:", result.payload);
       onLoginSuccess?.();
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Login</h2>
-      <FormControl
-        label="Email"
-        as="input"
-        type="email"
-        name="email"
-        value={form.email}
-        onChange={handleChange}
-        placeholder="Enter your email"
-        size="md"
-      />
+    <div className={styles.wrapper}>
+      <form onSubmit={handleSubmit} className={styles.loginForm}>
+        <h2 className={styles.loginTitle}>Login</h2>
 
-      <FormControl
-        label="Password"
-        as="input"
-        type="password"
-        name="password"
-        value={form.password}
-        onChange={handleChange}
-        placeholder="Enter your password"
-        size="md"
-      />
-      {/* <Input
-        label="Email"
-        type="email"
-        name="email"
-        value={form.email}
-        onChange={handleChange}
-        size="md"
-        error={error && "Invalid email"}
-      />
+        <div className={styles.formGroup}>
+          {/* <label className={styles.formLabel}>Email</label> */}
+          <FormControl
+            label="Email"
+            as="input"
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            placeholder="Enter your email"
+            size="md"
+          />
+        </div>
 
-      <Input
-        label="Password"
-        type="password"
-        name="password"
-        value={form.password}
-        onChange={handleChange}
-        size="md"
-        error={error && "Invalid password"}
-      /> */}
+        <div className={styles.formGroup}>
+          {/* <label className={styles.formLabel}>Password</label> */}
+          {/* <div className={styles.passwordWrapper}> */}
+          <FormControl
+            label="Password"
+            as="input"
+            type="password"
+            name="password"
+            value={form.password}
+            onChange={handleChange}
+            placeholder="Enter your password"
+            size="md"
+          />
+        </div>
 
-      <button type="submit" disabled={loading}>
-        {loading ? "Logging in..." : "Login"}
-      </button>
-    </form>
+        {error && <p className={styles.errorMsg}>{error}</p>}
+
+        <button type="submit" className={styles.submitBtn} disabled={loading}>
+          {loading ? "Logging in..." : "Login"}
+        </button>
+
+        <p className={styles.registerText}>
+          Don&apos;t have an account?{" "}
+          <Link to="/register" className={styles.registerLink}>
+            Register here
+          </Link>
+        </p>
+      </form>
+    </div>
   );
 };
 

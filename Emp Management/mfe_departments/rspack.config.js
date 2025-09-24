@@ -99,11 +99,26 @@ module.exports = {
     new rspack.container.ModuleFederationPlugin({
       name: 'mfe_departments',
       filename: 'remoteEntry.js',
-      exposes: {},
+       remotes: {
+        container: "container@http://localhost:3000/remoteEntry.js",
+        // mfe_shared: "mfe_shared@http://localhost:3005/remoteEntry.js",
+      },
+      exposes: {
+        "./DepartmentsPage": "./src/pages/DepartmentsPage.jsx",
+        "./DepartmentFormPage": "./src/pages/DepartmentFormPage.jsx",
+        "./DepartmentDetailsPage": "./src/pages/DepartmentDetailsPage.jsx",
+      },
       shared: {
-        react: { eager: true },
-        'react-dom': { eager: true },
-        'react-router-dom': { eager: true },
+        react: { singleton: true, requiredVersion: false },
+        "react-dom": { singleton: true, requiredVersion: false },
+        "react-router-dom": { singleton: true, requiredVersion: false },
+        "react-redux": { singleton: true, requiredVersion: false },
+        "@reduxjs/toolkit": {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
+        "react-toastify":{singleton: true, requiredVersion: false}
       },
     }),
     new rspack.DefinePlugin({

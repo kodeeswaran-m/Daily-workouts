@@ -1,0 +1,373 @@
+.employees-container {
+  padding: 1rem;
+}
+
+/* Header */
+.employees-header h2 {
+  display: block;
+  margin: 0;
+  color: #8347ad;
+}
+
+.subtitle {
+  margin-top: 0.25rem;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Toolbar */
+.employees-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+/* Search + Filters group */
+.search-filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 250px;
+}
+
+/* Search Box */
+.search-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+  flex: 1;
+  max-width: 200px;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  flex: 1;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* Toolbar actions */
+.toolbar-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.count-btn,
+.icon-btn,
+.primary-btn,
+.secondary-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  white-space: nowrap;
+}
+
+/* Buttons */
+.count-btn {
+  background: #f5f5f5;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+}
+
+.icon-btn {
+  background: #eee;
+  border: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.del-btn:hover {
+  background: #e92a1c;
+  color: white;
+}
+.dwn-btn:hover {
+  background: #777777;
+  color: white;
+}
+.primary-btn {
+  background: #8347ad;
+  color: white;
+  border: none;
+  padding: 0.5rem 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.secondary-btn {
+  background: #6c2c91;
+  color: white;
+  border: none;
+  padding: 0.5rem 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Filters */
+.filter-dropdown {
+  position: relative;
+}
+
+.filter-btn {
+  background: #f5f5f5;
+  border: 1px solid #ccc;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.filter-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-top: 0.25rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  min-width: 150px;
+}
+
+.filter-item {
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+}
+
+.filter-item:hover {
+  background-color: #f0f0f0;
+}
+
+/* Active filters as chips */
+.active-filter {
+  display: inline-flex;
+  align-items: center;
+  background: white;
+  border: 1px solid #8347ad;
+  color: #8347ad;
+  font-size: 0.85rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  margin-left: 0.25rem;
+}
+
+.clear-filter {
+  background: transparent;
+  border: none;
+  color: #8347ad;
+  margin-left: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+/* Employee Form */
+.employee-form {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-top: 1rem;
+  background: #fff;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  flex: 1;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+  color: #555;
+}
+
+.form-group input,
+.form-group select {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.form-actions .primary-btn,
+.form-actions .secondary-btn {
+  flex: none;
+}
+
+/* Modal */
+.form-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.form-modal-content {
+  background: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #8347ad;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1rem 0;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.pagination button {
+  border: 1px solid #8347ad;
+  background: rgba(131, 71, 173, 0.1);
+  color: #8347ad;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  min-width: 60px;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: #8347ad;
+  color: white;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #f5f5f5;
+  border-color: #ccc;
+  color: #999;
+}
+
+.pagination span {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .employees-header {
+    display: none;
+  }
+}
+
+@media (max-width: 992px) {
+  .employees-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-filter-group {
+    width: 100%;
+  }
+
+  .toolbar-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .primary-btn,
+  .secondary-btn {
+    flex: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-filter-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .filter-dropdown {
+    width: 100%;
+  }
+
+  .filter-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .active-filter {
+    width: 100%;
+    justify-content: space-between;
+    margin: 0.25rem 0 0 0;
+  }
+  .search-filter-group {
+  position: relative; /* allows absolute positioning inside */
+}
+
+
+
+  .filter-menu {
+    position: relative;
+    width: 100%;
+  }
+
+  .toolbar-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .count-btn,
+  .icon-btn {
+    flex: 1;
+    justify-content: center;
+  }
+}

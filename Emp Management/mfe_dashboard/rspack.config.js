@@ -1,9 +1,9 @@
-const rspack = require('@rspack/core')
-const refreshPlugin = require('@rspack/plugin-react-refresh')
-const isDev = process.env.NODE_ENV === 'development'
-const path = require('path');
+const rspack = require("@rspack/core");
+const refreshPlugin = require("@rspack/plugin-react-refresh");
+const isDev = process.env.NODE_ENV === "development";
+const path = require("path");
 
-const printCompilationMessage = require('./compilation.config.js');
+const printCompilationMessage = require("./compilation.config.js");
 
 /**
  * @type {import('@rspack/cli').Configuration}
@@ -11,44 +11,44 @@ const printCompilationMessage = require('./compilation.config.js');
 module.exports = {
   context: __dirname,
   entry: {
-    main: './src/index.js',
+    main: "./src/index.js",
   },
-  
+
   devServer: {
     port: 3002,
     historyApiFallback: true,
-    watchFiles: [path.resolve(__dirname, 'src')],
+    watchFiles: [path.resolve(__dirname, "src")],
     onListening: function (devServer) {
-      const port = devServer.server.address().port
+      const port = devServer.server.address().port;
 
-      printCompilationMessage('compiling', port)
+      printCompilationMessage("compiling", port);
 
-      devServer.compiler.hooks.done.tap('OutputMessagePlugin', (stats) => {
+      devServer.compiler.hooks.done.tap("OutputMessagePlugin", (stats) => {
         setImmediate(() => {
           if (stats.hasErrors()) {
-            printCompilationMessage('failure', port)
+            printCompilationMessage("failure", port);
           } else {
-            printCompilationMessage('success', port)
+            printCompilationMessage("success", port);
           }
-        })
-      })
-    }
+        });
+      });
+    },
   },
 
   resolve: {
-    extensions: ['.js','.jsx','.ts','.tsx','.json']
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
   },
   module: {
     rules: [
       {
         test: /\.svg$/,
-        type: 'asset',
+        type: "asset",
       },
       {
         test: /\.scss$/,
         use: [
           {
-            loader: 'postcss-loader',
+            loader: "postcss-loader",
             options: {
               postcssOptions: {
                 plugins: {
@@ -59,23 +59,23 @@ module.exports = {
             },
           },
         ],
-        type: 'css',
+        type: "css",
       },
       {
         test: /\.(jsx?|tsx?)$/,
         use: [
           {
-            loader: 'builtin:swc-loader',
+            loader: "builtin:swc-loader",
             options: {
               sourceMap: true,
               jsc: {
                 parser: {
-                  syntax: 'typescript',
+                  syntax: "typescript",
                   tsx: true,
                 },
                 transform: {
                   react: {
-                    runtime: 'automatic',
+                    runtime: "automatic",
                     development: isDev,
                     refresh: isDev,
                   },
@@ -83,10 +83,10 @@ module.exports = {
               },
               env: {
                 targets: [
-                  'chrome >= 87',
-                  'edge >= 88',
-                  'firefox >= 78',
-                  'safari >= 14',
+                  "chrome >= 87",
+                  "edge >= 88",
+                  "firefox >= 78",
+                  "safari >= 14",
                 ],
               },
             },
@@ -97,22 +97,35 @@ module.exports = {
   },
   plugins: [
     new rspack.container.ModuleFederationPlugin({
-      name: 'mfe_dashboard',
-      filename: 'remoteEntry.js',
-      exposes: {},
+      name: "mfe_dashboard",
+      filename: "remoteEntry.js",
+      remotes: {
+        container: "container@http://localhost:3000/remoteEntry.js",
+        // mfe_shared: "mfe_shared@http://localhost:3005/remoteEntry.js",
+      },
+      exposes: {
+        // "./EmployeeCountChart": "./src/components/EmployeeCountChart.jsx",
+        "./DashboardPage": "./src/pages/DashboardPage.jsx",
+      },
       shared: {
-        react: { eager: true },
-        'react-dom': { eager: true },
-        'react-router-dom': { eager: true },
+        react: { singleton: true, requiredVersion: false },
+        "react-dom": { singleton: true, requiredVersion: false },
+        "react-router-dom": { singleton: true, requiredVersion: false },
+        "react-redux": { singleton: true, requiredVersion: false },
+        "@reduxjs/toolkit": {
+          singleton: true,
+          requiredVersion: false,
+          eager: true,
+        },
       },
     }),
     new rspack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
     }),
     new rspack.ProgressPlugin({}),
     new rspack.HtmlRspackPlugin({
-      template: './src/index.html',
+      template: "./src/index.html",
     }),
     isDev ? new refreshPlugin() : null,
   ].filter(Boolean),
-}
+};

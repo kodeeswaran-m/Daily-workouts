@@ -1,4 +1,7 @@
+/* EmployeesPage.css */
+
 .employees-container {
+  margin-top: 6rem;
   padding: 1rem;
 }
 
@@ -59,6 +62,7 @@
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
+  flex-shrink: 0; 
 }
 
 .count-btn,
@@ -67,13 +71,15 @@
 .secondary-btn {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.3rem;
   white-space: nowrap;
 }
 
 /* Buttons */
 .count-btn {
-  background: #f5f5f5;
+  background: #8347ad;
+  color: white;
   border: none;
   padding: 0.4rem 0.8rem;
   border-radius: 4px;
@@ -87,12 +93,28 @@
   cursor: pointer;
 }
 
-.del-btn:hover {
+.del-btn {
   background: #e92a1c;
   color: white;
+  border: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.del-btn:hover {
+  background: #8347ad;
+  color: white;
+}
+.dwn-btn {
+  background: #777777;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
 }
 .dwn-btn:hover {
-  background: #777777;
+  background: #8347ad;
   color: white;
 }
 .primary-btn {
@@ -171,90 +193,6 @@
   margin-left: 4px;
   cursor: pointer;
   font-size: 0.9rem;
-}
-
-/* Employee Form */
-.employee-form {
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 1rem;
-  margin-top: 1rem;
-  background: #fff;
-}
-
-.form-row {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-bottom: 1rem;
-}
-
-.form-group {
-  flex: 1;
-  min-width: 150px;
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group label {
-  font-size: 0.85rem;
-  margin-bottom: 0.25rem;
-  color: #555;
-}
-
-.form-group input,
-.form-group select {
-  padding: 0.4rem 0.6rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  outline: none;
-}
-
-.form-actions {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-}
-
-.form-actions .primary-btn,
-.form-actions .secondary-btn {
-  flex: none;
-}
-
-/* Modal */
-.form-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 100;
-}
-
-.form-modal-content {
-  background: #fff;
-  padding: 1rem 1.5rem;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 600px;
-  position: relative;
-}
-
-.close-btn {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  background: transparent;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  color: #8347ad;
 }
 
 /* Pagination */
@@ -349,11 +287,6 @@
     justify-content: space-between;
     margin: 0.25rem 0 0 0;
   }
-  .search-filter-group {
-  position: relative; /* allows absolute positioning inside */
-}
-
-
 
   .filter-menu {
     position: relative;
@@ -370,4 +303,187 @@
     flex: 1;
     justify-content: center;
   }
+}
+
+/* default toast */
+.custom-toast {
+  border-radius: 8px;
+  font-size: 14px;
+  color: white;
+}
+
+/* success toast */
+.Toastify__toast--success {
+  background-color: white !important; /* green */
+  color: #8347ad !important;
+  /* color: #8347ad !important; */
+}
+
+/* error toast */
+.Toastify__toast--error {
+  background-color: white !important; /* green */
+  color: #8347ad !important;
+}
+
+/* global progress bar */
+.Toastify__progress-bar {
+  background: #007bff !important; /* blue */
+}
+
+/* success toast progress bar */
+.Toastify__progress-bar--success {
+  background: #8347ad !important; /* green */
+}
+
+/* error toast progress bar */
+.Toastify__progress-bar--error {
+  background: #dc3545 !important; /* red */
+}
+
+/* Employee Form */
+.employee-form {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-top: 1rem;
+  background: #fff;
+}
+.form-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.form-grid > * {
+  flex: 1 1 45%; /* Two fields per row above 768px */
+  min-width: 200px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .form-grid > * {
+    flex: 1 1 100%; /* Full width for mobile */
+  }
+}
+
+/* Field labels and inputs */
+.form-grid label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+  color: #555;
+}
+.form-grid input,
+.form-grid select,
+.form-grid textarea {
+  width: 100%;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  outline: none;
+}
+.error {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+/* Form actions */
+.form-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+.form-actions .primary-btn,
+.form-actions .secondary-btn {
+  flex: none;
+}
+
+/* Modal styles (if used) */
+.form-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* .form-modal-content {
+  background: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  position: relative;
+} */
+
+.form-modal-content {
+  background: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 95vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.form-modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+.form-modal-content::-webkit-scrollbar-thumb {
+  background-color: rgba(131, 71, 173, 0.5);
+  border-radius: 3px;
+}
+.form-modal-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #8347ad;
+}
+
+.scroll-top-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background-color: #8347ad;
+  color: white;
+  border: none;
+  padding: 10px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.scroll-top-btn:hover {
+  background-color: #7424ac;
+  transform: translateY(-3px);
+}
+
+.primary-btn:disabled {
+  background: #600893;
+  cursor: not-allowed; /* 🚫 danger sign */
+}
+
+.primary-btn:not(:disabled):hover {
+  background: #8347ad; /* your active hover color */
 }

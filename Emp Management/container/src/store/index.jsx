@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./authSlice";
 import employeesReducer from "./employeesSlice";
 import departmentsReducer from "./departmentsSlice";
-export { loginUser, registerUser, logoutUser, refreshAccessToken } from "./authSlice";
+export { loginUser, registerUser, logoutUser, refreshAccessToken, updateProfile } from "./authSlice";
 export {
   fetchEmployees,
   fetchEmployeeById,
@@ -10,6 +10,7 @@ export {
   createEmployee,
   updateEmployee,
   deleteEmployee,
+  downloadEmployeesExcel,
   toggleEmployeeStatus,
 } from "./employeesSlice";
 export {

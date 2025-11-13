@@ -15,6 +15,10 @@ module.exports = {
   },
 
   devServer: {
+    static: {
+      directory: path.join(__dirname, "public"),
+      publicPath: "/",
+    },
     port: 3000,
     historyApiFallback: true,
     watchFiles: [path.resolve(__dirname, "src")],
@@ -126,8 +130,13 @@ module.exports = {
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
     }),
     new rspack.ProgressPlugin({}),
+    // new rspack.HtmlRspackPlugin({
+    //   template: "./src/index.html",
+    //   favicon: "./public/favicon-v2.ico",
+    // }),
     new rspack.HtmlRspackPlugin({
-      template: "./src/index.html",
+      template: path.resolve(__dirname, "./src/index.html"),
+      favicon: path.resolve(__dirname, "./public/favicon-v2.ico"),
     }),
     isDev ? new refreshPlugin() : null,
   ].filter(Boolean),

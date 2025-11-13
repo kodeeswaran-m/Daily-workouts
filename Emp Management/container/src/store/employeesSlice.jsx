@@ -14,17 +14,33 @@ import api from "../api";
 //   }
 // );
 
+// export const fetchEmployees = createAsyncThunk(
+//   "employees/fetchAll",
+//   async (
+//     { page = 1, limit = 10, search = "", department = "", status = "" },
+//     { rejectWithValue }
+//   ) => {
+//     try {
+//       const res = await api.get("/employees", {
+//         params: { page, limit, search, department, status },
+//       });
+//       return res.data; // now returns { employees, total, page, pages }
+//     } catch (err) {
+//       return rejectWithValue(err.response?.data?.message || err.message);
+//     }
+//   }
+// );
 export const fetchEmployees = createAsyncThunk(
   "employees/fetchAll",
   async (
-    { page = 1, limit = 10, search = "", department = "", status = "" },
+    { after = null, limit = 50, search = "", department = "", status = "" },
     { rejectWithValue }
   ) => {
     try {
       const res = await api.get("/employees", {
-        params: { page, limit, search, department, status },
+        params: { after, limit, search, department, status },
       });
-      return res.data; // now returns { employees, total, page, pages }
+      return res.data; // { employees, nextCursor, hasMore }
     } catch (err) {
       return rejectWithValue(err.response?.data?.message || err.message);
     }
@@ -70,7 +86,6 @@ export const updateEmployee = createAsyncThunk(
   "employees/update",
   async ({ id, data }, { rejectWithValue }) => {
     try {
-
       console.log(" id, data", id, data);
       const res = await api.put(`/employees/${id}`, data);
       console.log("from slice(formdata) :", res);
@@ -106,6 +121,47 @@ export const deleteManyEmployees = createAsyncThunk(
   }
 );
 
+export const downloadEmployeesExcel = createAsyncThunk(
+  "employees/downloadExcel",
+  async ({ department, status }, { rejectWithValue }) => {
+    try {
+      // Build query string only for department and status
+      const queryParams = new URLSearchParams();
+      if (department) queryParams.append("department", department);
+      if (status) queryParams.append("status", status);
+
+      const res = await fetch(
+        `http://localhost:5000/api/employees/download/excel?${queryParams.toString()}`
+      );
+
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+
+      // Build dynamic filename
+      const activeFilters = [];
+      if (department) activeFilters.push(department);
+      if (status) activeFilters.push(status);
+
+      let fileName = "employees.xlsx"; // default
+      if (activeFilters.length > 0) {
+        fileName = `employees_filtered(${activeFilters.join("+")}).xlsx`;
+      }
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      return true;
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+);
+
+
 export const toggleEmployeeStatus = createAsyncThunk(
   "employees/toggleStatus",
   async (id, { rejectWithValue }) => {
@@ -120,22 +176,30 @@ export const toggleEmployeeStatus = createAsyncThunk(
 
 const employeeSlice = createSlice({
   name: "employees",
+
   // initialState: {
   //   list: [],
   //   selected: null,
   //   loading: false,
   //   error: null,
+
+  //   total: 0,
+  //   page: 1,
+  //   pages: 1,
+  //   searchedEmployee:null,
+
   // },
   initialState: {
     list: [],
-    total: 0,
-    page: 1,
-    pages: 1,
-    selected: null,
-    searchedEmployee:null,
+    nextCursor: null,
+    hasMore: true,
     loading: false,
     error: null,
+    employeeCount: 0,
+    selected: null,
+    searchedEmployee: null,
   },
+
   reducers: {
     clearSelected(state) {
       state.selected = null;
@@ -150,21 +214,40 @@ const employeeSlice = createSlice({
         s.loading = true;
         s.error = null;
       })
-      // .addCase(fetchEmployees.fulfilled, (s, a) => {
-      //   s.loading = false;
-      //   s.list = a.payload;
-      // })
       .addCase(fetchEmployees.fulfilled, (s, a) => {
         s.loading = false;
-        s.list = a.payload.employees;
-        s.total = a.payload.total;
-        s.page = a.payload.page;
-        s.pages = a.payload.pages;
+        if (a.meta.arg.after) {
+          s.list = [...s.list, ...a.payload.employees];
+        } else {
+          s.list = a.payload.employees;
+        }
+        s.employeeCount = a.payload.employeeCount;
+        s.nextCursor = a.payload.nextCursor;
+        s.hasMore = a.payload.hasMore;
       })
       .addCase(fetchEmployees.rejected, (s, a) => {
         s.loading = false;
         s.error = a.payload;
       })
+      // .addCase(fetchEmployees.pending, (s) => {
+      //   s.loading = true;
+      //   s.error = null;
+      // })
+      // // .addCase(fetchEmployees.fulfilled, (s, a) => {
+      // //   s.loading = false;
+      // //   s.list = a.payload;
+      // // })
+      // .addCase(fetchEmployees.fulfilled, (s, a) => {
+      //   s.loading = false;
+      //   s.list = a.payload.employees;
+      //   s.total = a.payload.total;
+      //   s.page = a.payload.page;
+      //   s.pages = a.payload.pages;
+      // })
+      // .addCase(fetchEmployees.rejected, (s, a) => {
+      //   s.loading = false;
+      //   s.error = a.payload;
+      // })
 
       .addCase(fetchEmployeeById.pending, (s) => {
         s.loading = true;
@@ -251,6 +334,16 @@ const employeeSlice = createSlice({
         }
       })
       .addCase(deleteManyEmployees.rejected, (s, a) => {
+        s.loading = false;
+        s.error = a.payload;
+      })
+      .addCase(downloadEmployeesExcel.pending, (s) => {
+        s.loading = true;
+      })
+      .addCase(downloadEmployeesExcel.fulfilled, (s) => {
+        s.loading = false;
+      })
+      .addCase(downloadEmployeesExcel.rejected, (s, a) => {
         s.loading = false;
         s.error = a.payload;
       })

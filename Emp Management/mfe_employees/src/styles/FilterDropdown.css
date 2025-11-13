@@ -1,0 +1,116 @@
+.filter-menu.multi-level {
+  display: flex;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: auto; /* shrink-to-fit */
+  z-index: 100;
+}
+
+.filter-main {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #ddd;
+  width: 150px; /* fixed width */
+  background: #fff;
+  position: relative;
+}
+
+.filter-main .filter-item {
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-main .filter-item:hover,
+.filter-main .filter-item.active-submenu {
+  background: #f5f5f5;
+}
+
+/* Fix submenu positioning */
+
+.filter-submenu {
+  position: absolute;
+  top: 0;
+  left: 100%; 
+  background: #fff;
+  border-left: 1px solid #ddd;
+  min-width: 180px;
+  max-height: 240px; 
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 6px; 
+  z-index: 100;
+}
+
+.filter-submenu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.filter-submenu::-webkit-scrollbar-thumb {
+  background-color: rgba(131, 71, 173, 0.9);
+  border-radius: 3px;
+}
+
+.filter-submenu::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+
+/* 
+.filter-submenu {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background: #fff;
+  border-left: 1px solid #ddd;
+  min-width: 180px;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-submenu .filter-item {
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.filter-submenu .filter-item:hover {
+  background: #f0f0f0;
+}
+
+.filter-submenu .filter-item.active-filter {
+  background-color: #8347ad;
+  color: white;
+  font-weight: 500;
+  width: 100%;
+}
+ */
+
+.filter-badge {
+  background-color: #8347ad;   
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 9999px;     
+  padding: 2px 8px;
+  margin-left: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  min-height: 16px;           
+  line-height: 1;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}

@@ -101,7 +101,7 @@ module.exports = {
       filename: 'remoteEntry.js',
        remotes: {
         container: "container@http://localhost:3000/remoteEntry.js",
-        // mfe_shared: "mfe_shared@http://localhost:3005/remoteEntry.js",
+        mfe_shared: "mfe_shared@http://localhost:3005/remoteEntry.js",
       },
       exposes: {
         "./DepartmentsPage": "./src/pages/DepartmentsPage.jsx",

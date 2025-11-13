@@ -1,74 +1,117 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "container/store";
-import FormControl from "mfe_shared/FormControl";
-import styles from "../styles/LoginForm.module.css";
-import { Link } from "react-router-dom";
+import {
+  getPasswordError,
+  validateEmail,
+  FormControl,
+  Spinner
+} from "mfe_shared/shared";
+import TagManager from "react-gtm-module";
+
+import { loginFields } from "../config/loginFields";
+import "../styles/LoginForm.css";
+
+import { ROUTES, MESSAGES, SIZES } from "../constants";
 
 const LoginForm = ({ onLoginSuccess }) => {
   const dispatch = useDispatch();
-  const { loading, error } = useSelector((state) => state.auth);
-  const [form, setForm] = useState({
-    email: "john@example.com",
-    password: "mypassword123",
-  });
+  const { loading, error: serverError } = useSelector((state) => state.auth);
 
-  const handleChange = (e) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+
+    if (name === "password") {
+      setErrors((prev) => ({
+        ...prev,
+        password: getPasswordError(value),
+      }));
+    } else if (name === "email") {
+      setErrors((prev) => ({
+        ...prev,
+        email: validateEmail(value),
+      }));
+    } else {
+      setErrors({ ...errors, [name]: "" });
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    const emailError = validateEmail(form.email);
+    if (emailError) newErrors.email = emailError;
+
+    const passwordError = getPasswordError(form.password);
+    if (passwordError) newErrors.password = passwordError;
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+  const isFormValid = () => {
+    return form.email && form.password && !errors.email && !errors.password;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
+
     const result = await dispatch(loginUser(form));
     if (loginUser.fulfilled.match(result)) {
-      console.log("Token is ready:", result.payload);
+      TagManager.dataLayer({
+        dataLayer: {
+          event: "login_success",
+          user_email: form.email,
+        },
+      });
       onLoginSuccess?.();
     }
   };
 
   return (
-    <div className={styles.wrapper}>
-      <form onSubmit={handleSubmit} className={styles.loginForm}>
-        <h2 className={styles.loginTitle}>Login</h2>
+    <div className="login-wrapper">
+      <form onSubmit={handleSubmit} className="login-form">
+        <h2 className="login-title">{MESSAGES.LOGIN_TITLE}</h2>
 
-        <div className={styles.formGroup}>
-          {/* <label className={styles.formLabel}>Email</label> */}
-          <FormControl
-            label="Email"
-            as="input"
-            type="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            placeholder="Enter your email"
-            size="md"
-          />
-        </div>
+        {loginFields.map((field) => (
+          <div className="form-group" key={field.name}>
+            <FormControl
+              label={field.label}
+              as="input"
+              type={field.type}
+              name={field.name}
+              value={form[field.name]}
+              onChange={handleChange}
+              placeholder={field.placeholder}
+              size={SIZES.INPUT}
+              error={errors[field.name]}
+              required={field.required}
+            />
+          </div>
+        ))}
 
-        <div className={styles.formGroup}>
-          {/* <label className={styles.formLabel}>Password</label> */}
-          {/* <div className={styles.passwordWrapper}> */}
-          <FormControl
-            label="Password"
-            as="input"
-            type="password"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-            placeholder="Enter your password"
-            size="md"
-          />
-        </div>
+        {serverError && <p className="error-msg">{serverError}</p>}
 
-        {error && <p className={styles.errorMsg}>{error}</p>}
-
-        <button type="submit" className={styles.submitBtn} disabled={loading}>
-          {loading ? "Logging in..." : "Login"}
+        <button
+          type="submit"
+          className="submit-btn"
+          disabled={loading || !isFormValid()}
+        >
+          {loading
+            // ? MESSAGES.LOGIN_BUTTON.LOADING
+            ? <Spinner/>
+            : MESSAGES.LOGIN_BUTTON.DEFAULT}
         </button>
 
-        <p className={styles.registerText}>
-          Don&apos;t have an account?{" "}
-          <Link to="/register" className={styles.registerLink}>
-            Register here
+        <p className="register-text">
+          {MESSAGES.REGISTER_TEXT}{" "}
+          <Link to={ROUTES.REGISTER} className="register-link">
+            {MESSAGES.REGISTER_LINK}
           </Link>
         </p>
       </form>
@@ -77,93 +120,3 @@ const LoginForm = ({ onLoginSuccess }) => {
 };
 
 export default LoginForm;
-
-// import React, { useState } from "react";
-// import styles from "../styles/LoginForm.module.css";
-// import { useDispatch, useSelector } from "react-redux";
-// import { loginUser } from "container/store"; // ✅ coming from container
-
-// const LoginForm = ({ onLoginSuccess }) => {
-//   const dispatch = useDispatch();
-//   const { loading, error, user, accessToken } = useSelector((state) => state.auth);
-//   console.log("user", user, accessToken);
-//   const [showPassword, setShowPassword] = useState(false);
-//   const [form, setForm] = useState({
-//     email: "john@example.com",
-//     password: "mypassword123",
-//   });
-
-//   const handleChange = (e) => {
-//     setForm({ ...form, [e.target.name]: e.target.value });
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     console.log("Login data:", form);
-
-//     try {
-//       const resultAction = await dispatch(loginUser(form));
-
-//       if (loginUser.fulfilled.match(resultAction)) {
-//         // ✅ successful login
-//         onLoginSuccess?.();
-//         setForm({ email: "", password: "" });
-//       }
-//     } catch (err) {
-//       console.error("Login error:", err);
-//     }
-//   };
-
-//   return (
-//     <div className={styles.wrapper}>
-//       <form onSubmit={handleSubmit} className={styles.loginForm}>
-//         <h2 className={styles.loginTitle}>Login</h2>
-
-//         {/* email */}
-//         <div className={styles.formGroup}>
-//           <label className={styles.formLabel}>Email</label>
-//           <input
-//             type="email"
-//             name="email"
-//             value={form.email}
-//             onChange={handleChange}
-//             required
-//             className={styles.formInput}
-//           />
-//         </div>
-
-//         {/* password */}
-//         <div className={styles.formGroup}>
-//           <label className={styles.formLabel}>Password</label>
-//           <div className={styles.passwordWrapper}>
-//             <input
-//               type={showPassword ? "text" : "password"}
-//               name="password"
-//               value={form.password}
-//               onChange={handleChange}
-//               required
-//               className={styles.formInput}
-//             />
-//             {/* <button
-//               type="button"
-//               onClick={() => setShowPassword(!showPassword)}
-//               className={styles.togglePassword}
-//             >
-//               {showPassword ? "🙈" : "👁️"}
-//             </button> */}
-//           </div>
-//         </div>
-
-//         {/* error message */}
-//         {error && <p className={styles.errorMsg}>{error}</p>}
-
-//         {/* submit button */}
-//         <button type="submit" className={styles.submitBtn} disabled={loading}>
-//           {loading ? "Logging in..." : "Login"}
-//         </button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default LoginForm;

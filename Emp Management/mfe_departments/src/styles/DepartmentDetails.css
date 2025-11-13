@@ -246,3 +246,49 @@
   display: flex;
   flex-direction: column;
 }
+
+/* ////////////////////////////////// */
+
+
+.dept-action-btn {
+  background-color: #4a148c;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.dept-action-btn:hover {
+  background-color: #6a1b9a;
+}
+
+.dept-action-btn.unassign {
+  background-color: #b71c1c;
+}
+
+.dept-action-btn.unassign:hover {
+  background-color: #d32f2f;
+}
+
+.dept-section input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.dept-section button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background-color: #1976d2;
+  color: white;
+}
+
+.dept-section button:hover {
+  background-color: #1565c0;
+}
+
+

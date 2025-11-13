@@ -1,3 +1,6 @@
+
+
+
 .form-control-group {
   display: flex;
   flex-direction: column;
@@ -25,6 +28,16 @@
   border-color: #7d4cdb;
   box-shadow: 0 0 0 2px rgba(125, 76, 219, 0.15);
 }
+/* Error state */
+.form-control-element.form-error {
+  border-color: red;
+}
+
+/* Error + focus state */
+.form-control-element.form-error:focus {
+  border-color: red;
+  box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.2);
+}
 
 /* Sizes */
 .form-sm {
@@ -48,4 +61,58 @@
   margin-top: 4px;
   color: red;
   font-size: 13px;
+}
+
+.required-asterisk {
+  color: red;
+  margin-left: 2px;
+  font-weight: bold;
+}
+
+
+
+
+
+
+
+.datepicker-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.datepicker-input {
+  width: 100%;
+  padding-right: 38px;
+  padding-left: 12px;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: border 0.2s ease;
+}
+
+.datepicker-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+}
+
+.calendar-icon {
+  position: absolute;
+  right: 12px;
+  color: #666;
+  pointer-events: none;
+  font-size: 18px;
+}
+
+.form-error {
+  border-color: #e74c3c !important;
+}
+
+.form-control-error {
+  color: #e74c3c;
+  font-size: 13px;
+  margin-top: 4px;
 }

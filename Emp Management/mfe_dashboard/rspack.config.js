@@ -101,11 +101,12 @@ module.exports = {
       filename: "remoteEntry.js",
       remotes: {
         container: "container@http://localhost:3000/remoteEntry.js",
-        // mfe_shared: "mfe_shared@http://localhost:3005/remoteEntry.js",
+        mfe_shared: "mfe_shared@http://localhost:3005/remoteEntry.js",
       },
       exposes: {
         // "./EmployeeCountChart": "./src/components/EmployeeCountChart.jsx",
         "./DashboardPage": "./src/pages/DashboardPage.jsx",
+        "./ProfilePage": "./src/pages/ProfilePage.jsx",
       },
       shared: {
         react: { singleton: true, requiredVersion: false },

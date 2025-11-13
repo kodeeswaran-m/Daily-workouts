@@ -13,9 +13,9 @@
   color: #4a1e74;
 }
 @media (min-width: 768px) {
-.departments-header{
-display: none;
-}
+  .departments-header {
+    display: none;
+  }
 }
 /* Toolbar */
 .departments-toolbar {
@@ -75,7 +75,8 @@ display: none;
 }
 
 .count-btn {
-  background: #f5f5f5;
+  background: #8347ad;
+  color: white;
   border: 1px solid #ddd;
   padding: 0.5rem 0.9rem;
 }
@@ -86,15 +87,31 @@ display: none;
   padding: 0.5rem 0.7rem;
 }
 
-.del-btn:hover {
+/* .del-btn:hover {
   background: #e92a1c;
   color: white;
 }
 .edit-btn:hover {
   background: #777777;
   color: white;
-}
+} */
 
+.del-btn {
+  background: #e92a1c;
+  color: white;
+}
+.del-btn:hover {
+  background: #8347ad;
+  color: white;
+}
+.edit-btn {
+  background: #777777;
+  color: white;
+}
+.edit-btn:hover {
+  background: #8347ad;
+  color: white;
+}
 .primary-btn {
   background: #8347ad;
   color: white;
@@ -164,7 +181,7 @@ display: none;
 }
 
 /* Department Card */
-.department-card {
+/* .department-card {
   display: flex;
   flex-direction: column;
   border: 1px solid #e2e2e2;
@@ -182,6 +199,42 @@ display: none;
 .department-card.selected {
   border-color: #8347ad;
   background: rgba(131, 71, 173, 0.05);
+} */
+
+.department-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e0e0e0; /* softer gray border */
+  border-radius: 12px; /* slightly more rounded corners */
+  padding: 1.25rem; /* more spacing for clean look */
+  background: #ffffff; /* pure white */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* subtle shadow for depth */
+}
+
+.department-card:hover {
+  border-color: #8347ad; /* primary color accent */
+  box-shadow: 0 8px 20px rgba(131, 71, 173, 0.15); /* smoother, larger shadow */
+  transform: translateY(-4px); /* lift effect */
+}
+
+.department-card.selected {
+  border-color: #8347ad;
+  background: rgba(131, 71, 173, 0.08); /* subtle tint for selected state */
+  box-shadow: 0 8px 20px rgba(131, 71, 173, 0.15); /* highlight selected */
+}
+
+.department-card .card-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.department-card .card-subtitle {
+  font-size: 0.9rem;
+  color: #666;
 }
 
 /* Header inside card */
@@ -258,9 +311,6 @@ display: none;
   }
 }
 
-
-
-
 /* default toast */
 .custom-toast {
   border-radius: 8px;
@@ -288,11 +338,10 @@ display: none;
 
 /* success toast progress bar */
 .Toastify__progress-bar--success {
-  background: #8347ad  !important; /* green */
+  background: #8347ad !important; /* green */
 }
 
 /* error toast progress bar */
 .Toastify__progress-bar--error {
   background: #dc3545 !important; /* red */
 }
-

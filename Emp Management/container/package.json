@@ -31,6 +31,7 @@
     "lucide-react": "^0.544.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-gtm-module": "^2.0.11",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.9.1",
     "react-toastify": "^11.0.5"

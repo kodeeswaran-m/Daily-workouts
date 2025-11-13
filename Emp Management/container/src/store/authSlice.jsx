@@ -50,6 +50,19 @@ export const logoutUser = createAsyncThunk(
   }
 );
 
+export const updateProfile = createAsyncThunk(
+  "auth/updateProfile",
+  async (data, { rejectWithValue }) => {
+    try {
+      console.log("data",data);
+      const res = await api.put("/auth/update-profile", data);
+      return res.data;
+    } catch (err) {
+      return rejectWithValue(err.response?.data?.message || err.message);
+    }
+  }
+);
+
 const slice = createSlice({
   name: "auth",
   initialState: {
@@ -86,6 +99,8 @@ const slice = createSlice({
       })
       .addCase(registerUser.fulfilled, (s, a) => {
         s.loading = false;
+        s.user = a.payload.user;
+        s.accessToken = a.payload.accessToken;
         // s.user = a.payload.user;
       })
       .addCase(registerUser.rejected, (s, a) => {
@@ -99,8 +114,8 @@ const slice = createSlice({
       })
       .addCase(refreshAccessToken.fulfilled, (s, a) => {
         console.log(
-          "✅ Refresh success, setting initialized=true",
-          a.payload.accessToken
+          " Refresh success, setting initialized=true",
+          a.payload
         );
         s.loading = false;
         s.user = a.payload.user;
@@ -119,7 +134,20 @@ const slice = createSlice({
         s.user = null;
         s.accessToken = null;
         s.initialized = true;
-      });
+      })
+      .addCase(updateProfile.pending, (s) => {
+      s.loading = true;
+      s.error = null;
+    })
+    .addCase(updateProfile.fulfilled, (s, a) => {
+      s.loading = false;
+      // update user state with new info
+      s.user = a.payload.user;
+    })
+    .addCase(updateProfile.rejected, (s, a) => {
+      s.loading = false;
+      s.error = a.payload;
+    });
   },
 });
 

@@ -2,6 +2,7 @@
 .department-form-page {
   max-width: 900px;
   margin: 2rem auto;
+  margin-top:  6rem;
   padding: 2rem;
   background: #fff;
   border-radius: 10px;
@@ -87,6 +88,7 @@
   cursor: pointer;
   font-size: 0.85rem;
   transition: background 0.2s;
+  margin-bottom: 16px;
 }
 
 .array-field button:hover {
@@ -170,6 +172,84 @@
 }
 
 
+/* Make description field span full width */
+.department-form .form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+/* Make the outer container span full row in the grid */
+.goals-projects-container {
+  display: flex;
+  gap: 1rem; /* space between Goals and Projects */
+  grid-column: 1 / -1; /* span full width in grid */
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+/* Sub-containers (Goals / Projects) */
+.goals-projects-container > .sub-container {
+  flex: 1; /* take equal space */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels */
+.goals-projects-container label {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+/* Array field styling */
+.array-field {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.array-field input {
+  flex: 1;
+}
+
+.array-field button {
+  background: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 0.35rem 0.7rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.2s;
+}
+
+.array-field button:hover {
+  background: #c82333;
+}
+
+/* Add buttons inside sub-container */
+.sub-container > button {
+  padding: 0.45rem 0.8rem;
+  margin-top: 0.5rem;
+  background: #8347ad;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+  width: fit-content;
+}
+
+.sub-container > button:hover {
+  background: #6c2c91;
+}
+
+/* Responsive: stack containers on small screens */
+@media (max-width: 768px) {
+  .goals-projects-container {
+    flex-direction: column;
+  }
+}
 
 
 /* default toast */
@@ -207,3 +287,11 @@
   background: #dc3545 !important; /* red */
 }
 
+.primary-btn:disabled {
+  background: #600893;
+  cursor: not-allowed; 
+}
+
+.primary-btn:not(:disabled):hover {
+  background: #5a3ea0; 
+}

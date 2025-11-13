@@ -113,39 +113,73 @@
   font-size: 18px;
 }
 
-.recentHires ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-.recentHires li {
-  padding: 10px 0;
-  border-bottom: 1px solid #eaeaea;
-  font-size: 15px;
-  color: #444;
+.table th {
+  background: #8347ad;
+  color: #fff;
+  text-align: left;
+  padding: 10px;
+  font-weight: 600;
+}
+
+.table td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.table tr:hover {
+  background: #f9f5fc;
+  transition: 0.2s ease;
+}
+
+.recentHeader {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-.recentHires li:last-child {
-  border-bottom: none;
+.recentSelect {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
 }
 
-.empName {
-  font-weight: 600;
-  color: #333;
+/* Wrap the table in a scrollable container */
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto; /* Enables horizontal scroll if content overflows */
 }
 
-.empDept {
-  font-style: italic;
-  color: #555;
+/* Prevent table headers and cells from wrapping */
+.table th,
+.table td {
+  white-space: nowrap;
 }
 
-.empDate {
-  font-size: 13px;
-  color: #777;
+/* Optional: Add some padding inside the scrollable area */
+.tableWrapper::-webkit-scrollbar {
+  height: 6px;
 }
+
+.tableWrapper::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.2);
+  border-radius: 3px;
+}
+
+.tableWrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 
 /* Error */
 .errorWrapper {
@@ -153,20 +187,30 @@
   padding: 60px;
 }
 
+.filterSelect,
 .retryBtn {
-  background: #8347ad;
-  color: #fff;
-  padding: 12px 18px;
-  border: none;
+  height: 40px;              /* same height */
+  padding: 0 12px;           /* horizontal padding for balance */
   border-radius: 6px;
-  margin-top: 12px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.retryBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;                  /* space between icon and text */
+  background-color: #8347ad; 
+  color: white;
   cursor: pointer;
-  transition: background 0.2s ease;
+  border: none;
 }
 
 .retryBtn:hover {
-  background: #6c3a91;
+  background-color: #0056b3;
 }
+
 
 /* Responsive */
 @media (max-width: 768px) {

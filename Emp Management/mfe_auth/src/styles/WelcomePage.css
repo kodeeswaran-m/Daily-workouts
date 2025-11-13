@@ -1,14 +1,30 @@
-.welcome-container {
+/* .welcome-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start; 
   align-items: center;
   height: 100vh;
   background: linear-gradient(135deg, #8347ad, #6c2c91);
   color: white;
   text-align: center;
-  padding: 2rem;
+  padding: 4rem 2rem 2rem; 
   box-sizing: border-box;
+} */
+
+
+.welcome-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: calc(100vh - 70px); 
+  background: linear-gradient(135deg, #8347ad, #6c2c91);
+  color: white;
+  text-align: center;
+  padding: 4rem 2rem 2rem;
+  box-sizing: border-box;
+  overflow: hidden; /* removes unwanted scrollbar */
 }
 
 .welcome-content h1 {
@@ -27,8 +43,62 @@
   flex-wrap: wrap;
   justify-content: center;
 }
-
 .primary-btn,
+.secondary-btn {
+  min-width: 150px; /* ensures same width for all */
+  text-align: center; /* center text */
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: clamp(0.9rem, 2.5vw, 1rem); /* responsive text */
+  transition: all 0.3s ease;
+}
+
+.primary-btn {
+  background-color: white;
+  padding: 0.75rem 1.5rem;
+  color: #8347ad;
+}
+
+.primary-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.secondary-btn {
+  background-color: transparent;
+  padding: 0.625rem 1.375rem;
+  color: white;
+  border: 2px solid white;
+}
+
+.secondary-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.welcome-footer {
+  position: absolute;
+  bottom: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .welcome-content h1 {
+    font-size: 2rem;
+  }
+
+  .welcome-content p {
+    font-size: 1rem;
+  }
+
+  .welcome-buttons {
+    flex-direction: column;
+  }
+}
+
+/* .primary-btn,
 .secondary-btn {
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
@@ -55,27 +125,4 @@
 
 .secondary-btn:hover {
   background-color: rgba(255, 255, 255, 0.2);
-}
-
-.welcome-footer {
-  position: absolute;
-  bottom: 1rem;
-  text-align: center;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .welcome-content h1 {
-    font-size: 2rem;
-  }
-
-  .welcome-content p {
-    font-size: 1rem;
-  }
-
-  .welcome-buttons {
-    flex-direction: column;
-  }
-}
+} */

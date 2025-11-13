@@ -1,0 +1,185 @@
+/* Center everything */
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+  background: #f5f5f5;
+  box-sizing: border-box;
+}
+
+/* Form container */
+.loginForm {
+  width: 100%;
+  max-width: 400px;
+  background: #fff;
+  padding: 2.5rem 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+.loginTitle {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Groups */
+.formGroup {
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* FormControl label handled in FormControl.css */
+.form-control-label {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #444;
+}
+
+/* FormControl input/textarea/select handled in FormControl.css */
+/* You can override width to 100% */
+.form-control-element {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.form-control-element:focus {
+  border-color: #7d4cdb;
+  box-shadow: 0 0 0 2px rgba(125, 76, 219, 0.15);
+}
+
+/* Error text */
+.form-control-error {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+/* Submit button */
+.submitBtn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 0.75rem;
+  background: #8347ad;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+/* .submitBtn:hover {
+  background: #6c2c91;
+} */
+
+.submitBtn:disabled {
+  background: #600893;
+  cursor: not-allowed; /* 🚫 danger sign */
+}
+
+.submitBtn:not(:disabled):hover {
+  background: #6c2c91; /* keep your hover color */
+}
+
+/* Server error message */
+.errorMsg {
+  color: red;
+  font-size: 0.875rem;
+  text-align: left;
+  margin-top: 0.5rem;
+}
+
+/* Register text/link */
+.registerText {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #555;
+}
+
+.registerLink {
+  color: #007bff;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.registerLink:hover {
+  text-decoration: underline;
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+  .loginForm {
+    padding: 2rem 1.5rem;
+  }
+
+  .loginTitle {
+    font-size: 1.5rem;
+  }
+
+  .form-control-element {
+    font-size: 0.9rem;
+    padding: 9px 10px;
+  }
+
+  .submitBtn {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+
+  .registerText {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .loginForm {
+    padding: 1.5rem 1rem;
+  }
+
+  .loginTitle {
+    font-size: 1.3rem;
+  }
+
+  .form-control-element {
+    font-size: 0.85rem;
+    padding: 8px 10px;
+  }
+
+  .submitBtn {
+    font-size: 0.9rem;
+    padding: 9px;
+  }
+
+  .registerText {
+    font-size: 0.8rem;
+  }
+}
+/* Default: 2 fields per row */
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem; /* spacing between fields */
+}
+
+/* Large screens: 1 field per row */
+@media (min-width: 1800px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+}

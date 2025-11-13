@@ -1,8 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../api";
 
-// Fetch all departments
-// Thunk
+
 export const fetchDepartments = createAsyncThunk(
   "departments/fetchAll",
   async ({ search = "", status = "" }, { rejectWithValue }) => {
@@ -80,7 +79,7 @@ export const deleteDepartment = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const res = await api.delete(`/departments/${id}`);
-      return { id, ...res.data }; // { message: "...", id }
+      return { id, ...res.data }; 
     } catch (err) {
       return rejectWithValue(err.response?.data?.message || err.message);
     }
@@ -93,7 +92,7 @@ export const assignEmployee = createAsyncThunk(
   async ({ id, employeeId }, { rejectWithValue }) => {
     try {
       const res = await api.post(`/departments/${id}/assign`, { employeeId });
-      return res.data; // { message, department }
+      return res.data; 
     } catch (err) {
       return rejectWithValue(err.response?.data?.message || err.message);
     }
@@ -106,7 +105,7 @@ export const unassignEmployee = createAsyncThunk(
   async ({ id, employeeId }, { rejectWithValue }) => {
     try {
       const res = await api.post(`/departments/${id}/unassign`, { employeeId });
-      return res.data; // { message, department }
+      return res.data; 
     } catch (err) {
       return rejectWithValue(err.response?.data?.message || err.message);
     }

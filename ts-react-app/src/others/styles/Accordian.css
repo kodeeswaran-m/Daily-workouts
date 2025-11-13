@@ -1,0 +1,24 @@
+.accordion {
+  width: 400px;
+  margin: 0 auto;
+}
+
+.accordion-item {
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+}
+
+.accordion-question {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.accordion-answer {
+  padding: 8px 0;
+  color: grey;
+}

@@ -1,0 +1,17 @@
+.btn {
+  padding: 6px 10px;
+  color: white;
+  background-color: black;
+  margin: 2px;
+  border: none;
+  border-radius: 16px;
+}
+
+.btn:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn:active{
+     color: black;
+  background-color: white;
+}

@@ -1,0 +1,13 @@
+.tabs {
+  border: none;
+  padding: 8px 16px;
+  width: 200px;
+  background-color: black;
+  color: white;
+  transition: background-color ease-in 0.2s;
+}
+
+.tabs.active {
+  color: white;
+  background-color: grey;
+}

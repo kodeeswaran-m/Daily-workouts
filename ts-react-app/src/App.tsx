@@ -16,9 +16,17 @@ import NotificationDemo from "./others/ScenarioBasedCompts/Notification/Notifica
 import AuthForm from "./others/ScenarioBasedCompts/AuthForm/AuthForm";
 import StepCounter from "./others/MC/StepCounter";
 import AccordianDisplay from "./others/MC/Accordian";
+import TabsDemo from "./others/MC/TabsDemo";
+import PaginationDemo from "./others/MC/Pagination";
+import StopWatchComponent from "./others/MC/StopWatch";
+import DynamicFormbuilder from "./others/MC/DynamicFormBuilder";
+import CardComponent from "./others/MC/CardComponent";
+import { Variable } from "lucide-react";
+import CardDemo from "./others/MC/CardComponent";
 
 function App() {
   const [showModal, setShowModal] = useState(false);
+
   return (
     <div>
       {/* <Counter/> */}
@@ -39,7 +47,12 @@ function App() {
 
       {/* Others MC */}
       {/* <StepCounter initialValue={0}/> */}
-      <AccordianDisplay/>
+      {/* <AccordianDisplay/> */}
+      {/* <TabsDemo/> */}
+      {/* <PaginationDemo /> */}
+      {/* <StopWatchComponent/> */}
+      {/* <DynamicFormbuilder/> */}
+      {/* <CardDemo/> */}
     </div>
   );
 }

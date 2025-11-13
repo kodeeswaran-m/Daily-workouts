@@ -1,0 +1,27 @@
+.btn {
+  border: none;
+  background-color: grey;
+  color: white;
+  padding: 6px 10px;
+  margin: 2px;
+}
+
+.active-btn {
+  background-color: black;
+  color: white;
+}
+
+.pg-btn {
+  background-color: rgb(243, 95, 95);
+  color: white;
+}
+
+.pg-btn:disabled {
+  background-color: rgb(233, 182, 182);
+  color: white;
+}
+
+
+.list-item{
+    list-style: none;
+}
